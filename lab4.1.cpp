@@ -11,7 +11,7 @@ void ReadStr(char* text)
     {
         i++; cin >> text[i];
     }
-    text[i] = '\n';
+    text[i] = '\0';
 }
 
 void NoWSread(char* text)
@@ -24,25 +24,39 @@ void NoWSread(char* text)
 int find_substring1(const char* str_for_search_in, const char* substring, int start_position)
 {
     int i = -1;
-    int len1 = char_traits<char>::length(str_for_search_in);
+    int len1 = char_traits<char>::length(str_for_search_in);//strlen(str_for_search_in);
     int len2 = char_traits<char>::length(substring);
     for (int j = start_position; j <= len1 - len2; j++)
     {
         bool c = true;
         for (int i1 = 0; i1 < len2; i1++)
-            if (str_for_search_in[i1 + j] != substring[i1]) c = false;
-        if ((c) && (i == -1)) i = j;
+            if (str_for_search_in[i1 + j] != substring[i1]) 
+            {
+            	c = false;
+            	break;
+            }
+        if ((c) && (i == -1)) 
+        {
+        	i = j;
+        	return i;
+        }
     }
     return i;
 }
 
 int* find_substring2(const char* str_for_search_in, const char* substring)
 {
-    int idx[255], k = 0, i = 0;
-    for (int j = 0; j < 255; j++) idx[j] = -1;
-    while (find_substring1(str_for_search_in, substring, i) != -1) {
-        idx[k++] = find_substring1(str_for_search_in, substring, i);
-        i = idx[k - 1] + 1;
+
+    int idx[255] = {-1} 
+    int k = 0, i = 0;
+    //for (int j = 0; j < 255; j++) idx[j] = -1;
+    idx[k] = find_substring1(str_for_search_in, substring, i);
+    while (idx[k]!= -1) {
+    
+     	i = idx[k] + 1;
+     	k++;
+        idx[k] = find_substring1(str_for_search_in, substring, i);
+       
     }
     int* mas = new int[k];
     for (int j = 0; j < k; j++) mas[j] = idx[j];
@@ -52,8 +66,7 @@ int* find_substring2(const char* str_for_search_in, const char* substring)
 
 bool Palindrom(char* str)
 {
-    int i = 0;
-    while (str[i] != '\n') i++;
+    int i = strlen(str);
     for (int j = 0; j < i - 1; j++) str[j] = tolower(str[j]);
     bool b = true;
     for (int j = 0; j < (i - 1) / 2; j++) {
