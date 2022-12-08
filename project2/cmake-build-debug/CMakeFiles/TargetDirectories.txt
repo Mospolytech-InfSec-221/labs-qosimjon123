@@ -1,0 +1,3 @@
+/home/qosimjon/Рабочий стол/c++_clion/project2/cmake-build-debug/CMakeFiles/project2.dir
+/home/qosimjon/Рабочий стол/c++_clion/project2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/qosimjon/Рабочий стол/c++_clion/project2/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,8 @@
+# ninja log v5
+0	13	1669876822749276643	CMakeFiles/project2.dir/position.cpp.o	322948fe13bd96f8
+1	43	1669876872864954038	CMakeFiles/project2.dir/circle.cpp.o	d2ae43aea1d8758b
+0	16	1669876822753276618	CMakeFiles/project2.dir/square.cpp.o	79af23231669afa2
+0	156	1669876578630883463	CMakeFiles/project2.dir/main.cpp.o	1abab7d1de0c38d8
+0	170	1669877325766783046	CMakeFiles/project2.dir/main.cpp.o	1abab7d1de0c38d8
+0	176	1669877325774782946	CMakeFiles/project2.dir/circleinsquare.cpp.o	6d9b1629f661325
+176	228	1669877325826782298	project2	5e0954f8649fd80b
