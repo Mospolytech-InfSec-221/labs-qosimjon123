@@ -108,7 +108,7 @@ public:
 		
 		
 	}
-	picture_qosimov& change_channel(char choice, double num) 
+	void change_channel(char choice, double num) 
 	{
 
 	}
