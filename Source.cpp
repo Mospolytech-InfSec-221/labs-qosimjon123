@@ -11,6 +11,10 @@ private:
 	fstream file;
 	fstream file2;
 	char bin[8];
+	int colichestvo = 256 * 256 * 3;
+	int special_info[54];
+	int weight = 231;
+	int height = 231;
 
 public:
 	picture_qosimov() 
@@ -108,6 +112,29 @@ public:
 	{
 
 	}
+	void change_noir(string filename) {
+		ofstream file_noir;
+		file_noir.open("result.txt", ios_base::binary);
+		int raschet;
+		
+		for (int i = 0; i < 54; i++)
+			file_noir << special_info[i];
+
+
+		for (int i = 0; i < this->colichestvo; i += 3) {
+			if (i >= this->colichestvo) { break; }
+			raschet = 0;
+			for (int j = 0; j < 3; j++) {
+				if (j >= this->colichestvo) { break; }
+				raschet += line2[i + j];
+			}
+			line2[i] = line2[i + 1] = line2[i + 2] = raschet / 3;
+		}
+		char* c = const_cast<char*>(line2.c_str());
+		
+		file_noir.write(c, 256 * 256 * 3);
+		file_noir.close();
+	}
 	void change_color(char cvet, double num) {
 		char bufer;
 		int pixel;
@@ -120,8 +147,40 @@ public:
 		}
 		cout << "vse";
 	};
-	int weight = 231;
-	int height = 231;
+	void change_color(std::string filename, char cvet, double num) {
+		std::ofstream fout;
+		fout.open("result.text", std::ios_base::binary);
+		int raschet;
+		for (int i = 0; i < 54; i++)
+			fout << special_info[i];
+		int iiiii;
+		if (cvet == 'r') {
+			iiiii = 0;
+		}
+		else if (cvet == 'g') {
+			iiiii = 1;
+		}
+		else if (cvet == 'b') {
+			iiiii = 2;
+		}
+		for (int i = iiiii; i < this->colichestvo; i += 3) {
+			if (i >= this->colichestvo) { break; }
+			raschet = line2[i] * num;
+			if (raschet > 255) {
+				line2[i] = 255;
+			}
+			else if (raschet < 0) {
+				line2[i] = 0;
+			}
+			else {
+				line2[i] = raschet;
+			}
+		}
+		char* c = const_cast<char*>(line2.c_str());
+		fout.write(c, 256 * 256 * 3);
+		fout.close();
+	};
+
 	picture_qosimov& change_noir() {};
 	bool flop() {
 		
@@ -136,7 +195,7 @@ public:
 		{
 			data += line;
 		}
-		ofstream file_to("Source_copy.bmp");
+		ofstream file_to("Source_copy.txt");
 		if (file_to.is_open() != true) {
 			cout << "cant open copy file" << endl;
 			return false;
@@ -172,7 +231,7 @@ public:
 		{
 			data += line;
 		}
-		ofstream file_to("Source_copy2.bmp");
+		ofstream file_to("Source_copy2.txt");
 		if (file_to.is_open() != true) {
 			cout << "cant open copy file" << endl;
 			return false;
@@ -202,6 +261,9 @@ int main() {
 	picture_qosimov picture(filename);
 	///*picture.read_pic(filename);*/
 	picture.change_color(3, 34);
+	picture.change_noir();
+	picture.flip();
+	picture.flop();
 	
 
 	
